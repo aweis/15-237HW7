@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Simple client for simple node server</title>
+</head>
+<body>
+    message: <input id="messageText" type="text" />
+    <br>
+    <button id="getButton">get</button>
+    <button id="setButton">set</button>
+    <form id="login" action="/login" method="post">
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username"/>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password"/>
+        </div>
+        <div>
+            <input type="submit" value="Log In"/>
+        </div>
+    </form>
+
+    <script>
+        function callCmd(cmd, args, onSuccessFn, onErrFn) {
+            var request = new XMLHttpRequest();
+            var isAsynchronous = true;
+            var url = "/json/" + cmd;
+            var separator = "?";
+            for (var key in args) {
+                url += separator;
+                url += key + "=" + args[key];
+                separator = "&";
+            }
+            request.open("POST", url, isAsynchronous); //gets are cached
+            request.onload = function(xmlEvent) {
+                var responseObject = JSON.parse(request.response);
+                if ("err" in responseObject) {
+                    console.log(responseObject.err);
+                    onErrFn(responseObject.err);
+                }
+                else {
+                    onSuccessFn(responseObject.result);
+                }
+            };
+            request.send();
+        }
+    </script>
+    
+    <script>
+    
+        function hasSessionCookie(){
+            var cookieArray = document.cookie.split(';');
+            var cookies = {};
+            for (var i = 0; i < cookieArray.length; i++){
+                var parts = cookieArray[i].split('=');
+                var key = parts[0].trim();
+                var value = parts[1];
+                cookies[key] = value;
+            }
+            //user will be an id if they're logged in
+            return cookies['user'] !== 'none';
+        }
+
+        window.onload = function() {
+
+            if (hasSessionCookie()){
+                document.getElementById('login').style.display = 'none';
+            }
+
+            var getButton = document.getElementById("getButton");
+            var setButton = document.getElementById("setButton");
+            var messageText = document.getElementById("messageText");
+            getButton.onclick = function() {
+                var cmd = "getMsg";
+                var args = { };
+                function onSuccessFn(result) {
+                    console.log("getMsg: result = " + result);
+                    messageText.value = result;
+                }
+                function onErrFn(err) {
+                    console.log("getMsg: err = " + err);
+                    messageText.value = err;
+                }
+                callCmd(cmd, args, onSuccessFn, onErrFn);
+            };
+            setButton.onclick = function() {
+                var cmd = "setMsg";
+                var args = { "msg" : messageText.value};
+                function onSuccessFn(result) {
+                    console.log("setMsg: result = " + result);
+                    messageText.value = result;
+                }
+                function onErrFn(err) {
+                    console.log("setMsg: err = " + err);
+                    messageText.value = err;
+                }
+                callCmd(cmd, args, onSuccessFn, onErrFn);
+            };
+        };
+    </script>
+
+</body>
+</html>
