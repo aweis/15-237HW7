@@ -1,8 +1,7 @@
 var movementStack;
 var neutral;
 
-function getDirection(accelerometer){
-	var movement = accelerometer.getLast();
+function getDirection(movement){
 
 	if(movementStack == undefined){
 		alert("init");
@@ -20,12 +19,9 @@ function getDirection(accelerometer){
 
 	if(xDiff > 1 || yDiff > 1 || xDiff < -1 || yDiff <-1){
 		if(yDiff > 0){
-			alert("up");
 			return "up";
 		}
 		else if(yDiff < 0){
-
-			alert("down");
 			return "down";
 		}
 	}
@@ -34,5 +30,5 @@ function getDirection(accelerometer){
 		movementStack = [];
 	}
 
-	return movement.x + " " movement.y;
+	return movement.x + " " + movement.y;
 }
