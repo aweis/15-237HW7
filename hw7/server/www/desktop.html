@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Pong</title>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+    <script type="text/javascript" src="Accelerometer.js"></script>
+    <script type="text/javascript" src="Player.js"></script>
+</head>
+<body>
+	
+	<h1>Page 2</h1>
+
+	<h2 id="replace">Text to be replaced</h2>
+
+	<script src="http://128.237.134.186:3000/socket.io/socket.io.js"></script>
+	<script>
+	// Make a connection to the socket.io server
+	// This also fires the "connection" event, but it doesn't matter
+	var socket = io.connect('http://128.237.134.186:3000/');
+
+	var player1 = new Player(1);
+	var player2 = new Player(2);
+	console.log(player2.id);
+
+	// When getting a "receive" event from the server
+	socket.on('receive', function(data) {
+		// update the DOM with received data
+
+		console.log("receive", data);
+
+		var player;
+
+		if(data.player === 1){
+			player = player1;
+		} else{
+			player = player2;
+		}
+
+		if(data.direction === "up"){
+			player.goUp();
+		} else{
+			player.goDown();
+		}
+
+	});
+	</script>    
+</body>
+</html>
