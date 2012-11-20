@@ -3,9 +3,17 @@ var Player = function(id) {
 }
 
 Player.prototype.goUp = function(){
-	console.log(this.id, "up");
+	if(this.id === 1){
+		$("#playerone").html("up");
+	} else{
+	$("#playertwo").html("up");
+	}
 }
 
 Player.prototype.goDown = function(){
-	console.log(this.id, "down");
+	if(this.id === 1){
+		$("#playerone").html("down");
+	} else{
+	$("#playertwo").html("down");
+	}
 }

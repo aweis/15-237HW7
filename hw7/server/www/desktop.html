@@ -8,10 +8,9 @@
     <script type="text/javascript" src="Player.js"></script>
 </head>
 <body>
-	
-	<h1>Page 2</h1>
 
-	<h2 id="replace">Text to be replaced</h2>
+	<h1>Player 1</h1><h1 id="playerone"></h1>
+	<h1>Player 2</h1><h1 id="playertwo"></h1>
 
 	<script src="http://128.237.134.186:3000/socket.io/socket.io.js"></script>
 	<script>
@@ -21,13 +20,10 @@
 
 	var player1 = new Player(1);
 	var player2 = new Player(2);
-	console.log(player2.id);
+	//console.log("hellloooo", player2);
 
 	// When getting a "receive" event from the server
 	socket.on('receive', function(data) {
-		// update the DOM with received data
-
-		console.log("receive", data);
 
 		var player;
 

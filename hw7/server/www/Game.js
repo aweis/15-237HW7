@@ -20,9 +20,12 @@ function getDirection(accelerometer){
 
 	if(xDiff > 1 || yDiff > 1 || xDiff < -1 || yDiff <-1){
 		if(yDiff > 0){
+			alert("up");
 			return "up";
 		}
 		else if(yDiff < 0){
+
+			alert("down");
 			return "down";
 		}
 	}
@@ -31,5 +34,5 @@ function getDirection(accelerometer){
 		movementStack = [];
 	}
 
-	return "hello";
+	return movement.x + " " movement.y;
 }

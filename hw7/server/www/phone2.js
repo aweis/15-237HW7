@@ -22,5 +22,5 @@
 		}
 		// emit to the server the "send" event, with our data object
 		//alert(getDirection(accelerometer));
-		socket.emit('send', {"player": 1, "direction": direction});
+		socket.emit('send', {"player": 2, "direction": direction});
 	}

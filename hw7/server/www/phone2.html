@@ -4,25 +4,13 @@
 	<meta charset="UTF-8">
 	<title></title>
 </head>
+
 <body>
-	
-	<h1>Page 2</h1>
-
-	<h2 id="replace">Text to be replaced</h2>
-
-	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
-	<script>
-	// Make a connection to the socket.io server
-	// This also fires the "connection" event, but it doesn't matter
-	var socket = io.connect('http://localhost:3000/');
-	var accelerometer = new Accelerometer();
-
-	setInterval(timer, 200);
-
-	function timer() {
-		// emit to the server the "send" event, with our data object
-		socket.emit('send', {"player": 2, "direction": getDirection(accelerometer)});
-	}
-	</script>
+	<script src="http://128.237.134.186:3000/socket.io/socket.io.js"></script>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+	<script type="text/javascript" src="Util.js"></script>
+	<script type="text/javascript" src="Accelerometer.js"></script>
+	<script type="text/javascript" src="phone2.js"></script>
+	Player 2
 </body>
 </html>

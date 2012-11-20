@@ -114,9 +114,25 @@ Accelerometer.prototype.startListeningKeys = function(){
 }
 
 Accelerometer.prototype.getLast = function(){
+    if (window.util.isIOS()){
         return {
             x: this.x,
             y: -this.y,
             z: this.z
         };
+    }
+    else if (window.util.isAndroid() && window.util.isChrome()){
+        return {
+            x: this.x,
+            y: -this.y,
+            z: this.z
+        };
+    }
+    else {
+        return {
+            x: -this.x,
+            y: this.y,
+            z: this.z
+        };
+    }
 }
