@@ -6,12 +6,36 @@
 </head>
 
 <body>
-	<script src="http://128.237.218.85:3000/socket.io/socket.io.js"></script>
+	<script src="http://128.237.190.136:3000/socket.io/socket.io.js"></script>
 	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
 	<script type="text/javascript" src="Util.js"></script>
 	<script type="text/javascript" src="Game.js"></script>
 	<script type="text/javascript" src="Accelerometer.js"></script>
 	<script type="text/javascript" src="phone2.js"></script>
 	Player 2
+    
+    <script>
+    
+        function hasSessionCookie(){
+            var cookieArray = document.cookie.split(';');
+            var cookies = {};
+            for (var i = 0; i < cookieArray.length; i++){
+                var parts = cookieArray[i].split('=');
+                var key = parts[0].trim();
+                var value = parts[1];
+                cookies[key] = value;
+            }
+            //user will be an id if they're logged in
+            return cookies['user'] !== 'none';
+        }
+
+        window.onload = function() {
+
+            if (!hasSessionCookie()){
+                document.getElementById('login').style.display = 'none';
+                window.location = "login.html";
+            }
+        };
+    </script>
 </body>
 </html>

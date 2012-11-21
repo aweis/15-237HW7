@@ -19,7 +19,7 @@ Pong.prototype.setup = function(){
                             'maxX': this.width, 'maxY': this.height});
     
     this.initBall();
-    this.socket = io.connect('http://128.237.218.85:3000/');
+    this.socket = io.connect('http://128.237.190.136:3000/');
 
     this.socket.on('receive', function(data) {
 
@@ -33,9 +33,6 @@ Pong.prototype.setup = function(){
 
         if(paddle!=undefined) {
             paddle.update(data.direction);
-        }
-        else{
-            alert(data.player + " " + data.direction + " " + this.paddle1.y);
         }
     }.bind(this));
 }
@@ -69,7 +66,6 @@ Pong.prototype.initBall = function(){
 var count = 0;
 
 Pong.prototype.draw = function(timeDiff){
-    console.log("drawww" + count++);
     this.clearPage();
     this.drawBall(timeDiff);
     this.paddle1.draw(this.page);

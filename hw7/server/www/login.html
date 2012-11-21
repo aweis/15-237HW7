@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Simple client for simple node server</title>
+</head>
+<body>
+    <form id="login" action="/login" method="post">
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username"/>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password"/>
+        </div>
+        <div>
+            <input type="submit" value="Log In"/>
+        </div>
+    </form>
+
+    <script>
+    
+        function hasSessionCookie(){
+            var cookieArray = document.cookie.split(';');
+            var cookies = {};
+            for (var i = 0; i < cookieArray.length; i++){
+                var parts = cookieArray[i].split('=');
+                var key = parts[0].trim();
+                var value = parts[1];
+                cookies[key] = value;
+            }
+            return cookies['user'];
+        }
+
+        window.onload = function() {
+
+            if (hasSessionCookie() == 0){
+                document.getElementById('login').style.display = 'none';
+                window.location = "phone1.html";
+            } else if (hasSessionCookie() == 1){
+                document.getElementById('login').style.display = 'none';
+                window.location = "phone2.html";
+            }
+        };
+    </script>
+
+</body>
+</html>
